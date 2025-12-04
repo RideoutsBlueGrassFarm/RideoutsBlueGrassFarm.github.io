@@ -129,6 +129,44 @@ cursor: pointer;
 color: #ffe6b8;
 }
 
+/* ------- GUITAR BAR (STRINGS + FRETS) ------- */
+.guitar-bar {
+height: 38px;
+background:
+/* strings (horizontal lines) */
+linear-gradient(to bottom,
+rgba(0,0,0,0) 0,
+rgba(0,0,0,0) 7px,
+#f7e2a7 7px,
+#f7e2a7 9px,
+rgba(0,0,0,0) 9px,
+rgba(0,0,0,0) 14px,
+#f5d790 14px,
+#f5d790 16px,
+rgba(0,0,0,0) 16px,
+rgba(0,0,0,0) 21px,
+#f3cd7b 21px,
+#f3cd7b 23px,
+rgba(0,0,0,0) 23px,
+rgba(0,0,0,0) 28px,
+#f1c366 28px,
+#f1c366 30px,
+rgba(0,0,0,0) 30px,
+rgba(0,0,0,0) 100%
+),
+/* frets (vertical bars) */
+repeating-linear-gradient(to right,
+rgba(0,0,0,0) 0,
+rgba(0,0,0,0) 54px,
+rgba(0,0,0,0.65) 54px,
+rgba(0,0,0,0.65) 56px
+),
+/* neck wood */
+linear-gradient(90deg, #4a2511, #8b4d22, #4a2511);
+box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+border-bottom: 1px solid rgba(255, 214, 153, 0.35);
+}
+
 /* ------- HERO ------- */
 .hero {
 background:
@@ -521,7 +559,7 @@ font-size: 0.9rem;
 .brand-text-sub {
 font-size: 0.72rem;
 }
-
+}
 </style>
 </head>
 <body>
@@ -554,6 +592,9 @@ font-size: 0.72rem;
 </div>
 </header>
 
+<!-- GUITAR NECK DECORATION -->
+<div class="guitar-bar" aria-hidden="true"></div>
+
 <!-- HERO -->
 <section class="hero">
 <div class="wrap hero-grid">
@@ -584,12 +625,12 @@ View Show Schedule
 <aside class="hero-card" aria-label="Radio snapshot">
 <h2>On Air Right Now</h2>
 <div class="now-playing">
-<div class="now-playing-label">Example placeholder</div>
+<div class="now-playing-label">EXAMPLE PLACEHOLDER</div>
 <div class="now-playing-title">“Blue Moon of Kentucky”</div>
 <div class="now-playing-artist">Bill Monroe</div>
 </div>
 
-<div class="show-strip" style="margin-top:0.9rem;">
+<div class="show-strip">
 <div class="show-pill">
 <strong>Morning Pasture</strong>
 Mon–Fri · 7:00–10:00 AM · Easy, classic bluegrass.
@@ -667,7 +708,7 @@ below.
 <div class="section-kicker">Shows &amp; Schedule</div>
 <h2>Regular Programs on Rideout’s Bluegrass Farm Radio</h2>
 <p>
-Times are shown in local Panama City, Florida time. Adjust as needed for your listeners.
+Times are shown in local Panama City, Florida time.
 </p>
 </div>
 
@@ -750,7 +791,7 @@ Live365.
 <!-- PLAYER -->
 <div>
 <div class="player-embed">
-<h3 style="font-size:1rem;margin-bottom:0.5rem;color:#3a2412;">Listen Live</h3>
+<h3 style="font-size:1rem;margin-bottom:0.5rem;">Listen Live</h3>
 
 <!-- LIVE365 WIDGET – your code -->
 <iframe width="450" height="511" frameborder="0"
@@ -772,8 +813,8 @@ Rideout’s Bluegrass Farm on Live365
 <div id="contact" class="request-box">
 <h3>Song Requests &amp; Shout-Outs</h3>
 <p style="margin-bottom:0.7rem;">
-Have a favorite song or artist you’d like to hear? Send a request or a shout-out message
-using the form below.
+Have a favorite song or artist you’d like to hear? Send a request or a shout-out using
+the form below.
 </p>
 
 <form onsubmit="handleRequest(event)">
@@ -793,7 +834,7 @@ using the form below.
 placeholder="Who’s it for, or what do you want to say on air?"></textarea>
 </div>
 
-<button class="btn-primary" type="submit">Send Request (Demo)</button>
+<button class="btn-nav" type="submit">Send Request (Demo)</button>
 <div id="request-status" class="small-hint"></div>
 
 <div class="small-hint" style="margin-top:0.5rem;">
@@ -804,7 +845,6 @@ service or backend that forwards messages to your inbox.
 
 <div style="margin-top:1.1rem;">
 <strong>Contact Email:</strong>
-<!-- Replace this placeholder with your real email address -->
 <span>your-email@example.com</span>
 </div>
 </div>
@@ -849,8 +889,3 @@ document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
-
-
-
-
-
