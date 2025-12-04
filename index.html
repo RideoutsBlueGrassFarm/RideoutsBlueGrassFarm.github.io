@@ -1,900 +1,856 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Adam Rideout’s Blue Grass Farm Radio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-        content="Adam Rideout’s Blue Grass Farm Radio – streaming bluegrass and country music live online.">
-  <style>
-    /* RESET */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-      color: #122033;
-      background: #050915;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* LAYOUT BASICS */
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(2, 9, 24, 0.96);
-      backdrop-filter: blur(6px);
-      color: #f9fbff;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .nav-bar {
-      min-height: 58px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .logo-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #6bffcc, #0f7cf0 55%, #09152e 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.1rem;
-    }
-
-    .logo-text-main {
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .logo-text-sub {
-      font-size: 0.78rem;
-      opacity: 0.8;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 1.3rem;
-      font-size: 0.9rem;
-    }
-
-    nav a {
-      position: relative;
-      padding-bottom: 0.1rem;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: #4bffb3;
-      transition: width 0.18s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    .btn-nav {
-      padding: 0.45rem 0.95rem;
-      border-radius: 999px;
-      border: none;
-      background: #4bffb3;
-      color: #021024;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .nav-toggle {
-      display: none;
-      border: none;
-      background: none;
-      color: #fdfdfd;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* HERO */
-    .hero {
-      background:
-        radial-gradient(circle at 15% 0%, rgba(75,255,179,0.28), transparent 60%),
-        radial-gradient(circle at 85% 10%, rgba(80,180,255,0.22), transparent 65%),
-        linear-gradient(150deg, #050915, #020515 52%, #040a1a);
-      color: #f9fbff;
-      padding: 3.5rem 0 3.8rem;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .hero-kicker {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.7rem;
-      color: #8bb3ff;
-    }
-
-    .hero h1 {
-      margin: 0.9rem 0 0.4rem;
-      font-size: clamp(2.2rem, 4vw, 3.1rem);
-    }
-
-    .hero h1 span {
-      color: #4bffb3;
-    }
-
-    .hero p {
-      font-size: 0.98rem;
-      max-width: 33rem;
-      color: #c5d0f0;
-      margin-bottom: 1.15rem;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.4rem;
-      font-size: 0.78rem;
-    }
-
-    .tag {
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(1,6,20,0.7);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.9rem;
-    }
-
-    .btn-primary {
-      border-radius: 999px;
-      border: none;
-      padding: 0.75rem 1.4rem;
-      background: #4bffb3;
-      color: #020815;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.95rem;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.55);
-    }
-
-    .btn-outline {
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.45);
-      padding: 0.72rem 1.3rem;
-      background: transparent;
-      color: #f9fbff;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    .hero-note {
-      font-size: 0.78rem;
-      color: #a9b7e2;
-    }
-
-    .hero-card {
-      background: radial-gradient(circle at 0 0, rgba(75,255,179,0.22), transparent 58%),
-                  rgba(3,9,27,0.88);
-      border-radius: 1.3rem;
-      padding: 1.3rem 1.15rem 1.25rem;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 18px 36px rgba(0,0,0,0.65);
-    }
-
-    .hero-card h2 {
-      font-size: 1rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .now-playing {
-      margin-bottom: 0.8rem;
-      font-size: 0.9rem;
-    }
-
-    .now-playing-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #7fb4ff;
-    }
-
-    .now-playing-title {
-      font-size: 0.97rem;
-      font-weight: 600;
-      margin-top: 0.1rem;
-    }
-
-    .now-playing-artist {
-      font-size: 0.86rem;
-      color: #c3cff1;
-    }
-
-    .show-strip {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 0.55rem;
-      margin-bottom: 1rem;
-      font-size: 0.8rem;
-    }
-
-    .show-pill {
-      padding: 0.55rem 0.55rem;
-      border-radius: 0.7rem;
-      background: rgba(4,15,40,0.9);
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .show-pill strong {
-      display: block;
-      font-size: 0.82rem;
-    }
-
-    .hero-player-note {
-      font-size: 0.78rem;
-      color: #a6b5dc;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 3.2rem 0;
-      color: #dde6ff;
-    }
-
-    .section-head {
-      text-align: center;
-      margin-bottom: 2.3rem;
-    }
-
-    .section-kicker {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.75rem;
-      color: #7d9fe0;
-      margin-bottom: 0.35rem;
-    }
-
-    .section-head h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.25rem;
-      color: #f9fbff;
-    }
-
-    .section-head p {
-      max-width: 32rem;
-      margin: 0 auto;
-      font-size: 0.92rem;
-      color: #aeb7d7;
-    }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 2.2rem;
-      align-items: flex-start;
-    }
-
-    .about-grid p {
-      font-size: 0.95rem;
-      color: #c4ceee;
-      margin-bottom: 0.9rem;
-    }
-
-    .about-list {
-      list-style: none;
-      font-size: 0.9rem;
-      color: #aeb8e0;
-    }
-
-    .about-list li {
-      padding-left: 1.1rem;
-      position: relative;
-      margin-bottom: 0.4rem;
-    }
-
-    .about-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #4bffb3;
-    }
-
-    .about-card {
-      background: radial-gradient(circle at 80% 0%, rgba(74,191,255,0.18), transparent 60%),
-                  #050b18;
-      border-radius: 1rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 1.1rem 1.1rem 1.25rem;
-      font-size: 0.88rem;
-    }
-
-    .about-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      color: #f5f7ff;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.65rem;
-    }
-
-    .pill {
-      font-size: 0.78rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(12,25,60,0.9);
-      border: 1px solid rgba(255,255,255,0.09);
-    }
-
-    /* SHOWS & SCHEDULE */
-    .show-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.3rem;
-    }
-
-    .show-card {
-      background: #050b18;
-      border-radius: 1rem;
-      border: 1px solid rgba(255,255,255,0.07);
-      padding: 1rem 0.95rem 1.15rem;
-      font-size: 0.88rem;
-    }
-
-    .show-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
-      color: #f7fbff;
-    }
-
-    .show-time {
-      font-size: 0.8rem;
-      color: #8eb7ff;
-      margin-bottom: 0.4rem;
-    }
-
-    .show-desc {
-      color: #b5c0e5;
-      margin-bottom: 0.5rem;
-    }
-
-    .show-tag {
-      font-size: 0.78rem;
-      color: #85f6bf;
-    }
-
-    /* HOW TO LISTEN / REQUEST */
-    .listen-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: flex-start;
-    }
-
-    .steps {
-      list-style: none;
-      font-size: 0.9rem;
-      color: #c4ceee;
-    }
-
-    .steps li {
-      margin-bottom: 0.6rem;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .steps li::before {
-      content: "?";
-      position: absolute;
-      left: 0;
-      color: #4bffb3;
-      font-size: 0.9rem;
-    }
-
-    .request-box {
-      background: #050b18;
-      border-radius: 1rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 1.1rem 1rem 1.3rem;
-      font-size: 0.88rem;
-    }
-
-    .field {
-      margin-bottom: 0.75rem;
-    }
-
-    label {
-      display: block;
-      font-size: 0.82rem;
-      color: #b8c4eb;
-      margin-bottom: 0.2rem;
-    }
-
-    input, textarea {
-      width: 100%;
-      border-radius: 0.6rem;
-      border: 1px solid #1c2844;
-      padding: 0.55rem 0.6rem;
-      font: inherit;
-      font-size: 0.88rem;
-      background: #030712;
-      color: #e5ecff;
-      outline: none;
-    }
-
-    input:focus, textarea:focus {
-      border-color: #4bffb3;
-      box-shadow: 0 0 0 1px rgba(61,255,189,0.35);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .small-hint {
-      font-size: 0.78rem;
-      color: #8f9ac7;
-      margin-top: 0.2rem;
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 1.3rem 0 1.6rem;
-      color: #8e9ac0;
-      font-size: 0.82rem;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.7rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: #d4defa;
-      font-weight: 500;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 860px) {
-      nav ul {
-        position: absolute;
-        right: 1.25rem;
-        top: 58px;
-        background: rgba(2,9,24,0.97);
-        padding: 0.75rem 1rem 0.9rem;
-        border-radius: 0 0 0.8rem 0.8rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-        min-width: 190px;
-        display: none;
-      }
-
-      nav ul.open {
-        display: flex;
-      }
-
-      .btn-nav {
-        display: none;
-      }
-
-      .nav-toggle {
-        display: block;
-      }
-
-      .hero-grid {
-        grid-template-columns: minmax(0,1fr);
-      }
-
-      .hero-card {
-        order: -1;
-      }
-
-      .about-grid,
-      .listen-grid {
-        grid-template-columns: minmax(0,1fr);
-      }
-
-      .show-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-      }
-    }
-
-    @media (max-width: 620px) {
-      .show-grid {
-        grid-template-columns: minmax(0,1fr);
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Rideout’s Bluegrass Farm Radio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+content="Rideout’s Bluegrass Farm Radio – Bluegrass & Country from the Farm to Your Ears. Broadcasting from Panama City, Florida via Live365.">
+
+<style>
+/* ------- RESET ------- */
+*, *::before, *::after {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+body {
+font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+background: #f6f0e4;
+color: #2f2417;
+line-height: 1.6;
+}
+img {
+max-width: 100%;
+display: block;
+}
+a {
+color: inherit;
+text-decoration: none;
+}
+
+.wrap {
+max-width: 1100px;
+margin: 0 auto;
+padding: 0 1.25rem;
+}
+section {
+padding: 3rem 0;
+}
+
+/* ------- HEADER / NAV ------- */
+header {
+position: sticky;
+top: 0;
+z-index: 50;
+background: #f6f0e4ee;
+backdrop-filter: blur(6px);
+border-bottom: 1px solid #d1c1a5;
+}
+.nav {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1rem;
+min-height: 64px;
+}
+.brand {
+display: flex;
+align-items: center;
+gap: 0.85rem;
+}
+.brand-logo {
+width: 52px;
+height: 52px;
+border-radius: 8px;
+overflow: hidden;
+border: 2px solid #4d3a22;
+background: #e0cda7;
+}
+/* Upload your barn artwork as "logo.jpg" in the repo root for this to show */
+.brand-logo img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.brand-text-main {
+font-weight: 800;
+font-size: 0.98rem;
+text-transform: uppercase;
+letter-spacing: 0.09em;
+color: #2b1b10;
+}
+.brand-text-sub {
+font-size: 0.78rem;
+color: #7a5a34;
+}
+
+nav ul {
+list-style: none;
+display: flex;
+gap: 1.25rem;
+font-size: 0.9rem;
+}
+nav a {
+position: relative;
+padding-bottom: 0.1rem;
+}
+nav a::after {
+content: "";
+position: absolute;
+left: 0;
+bottom: 0;
+width: 0;
+height: 2px;
+background: #2f7f43;
+transition: width 0.18s ease;
+}
+nav a:hover::after {
+width: 100%;
+}
+
+.btn-nav {
+border-radius: 999px;
+border: none;
+padding: 0.5rem 1.1rem;
+background: #2f7f43;
+color: #fdfaf4;
+font-size: 0.85rem;
+font-weight: 600;
+cursor: pointer;
+white-space: nowrap;
+}
+.nav-toggle {
+display: none;
+border: none;
+background: none;
+font-size: 1.6rem;
+cursor: pointer;
+}
+
+/* ------- HERO ------- */
+.hero {
+background:
+radial-gradient(circle at 0% 0%, #ffe7b4 0, transparent 60%),
+radial-gradient(circle at 100% 0%, #c3f2c3 0, transparent 55%),
+linear-gradient(180deg, #fdf6ea, #f4e1c0);
+border-bottom: 1px solid #d1c1a5;
+}
+.hero-grid {
+display: grid;
+grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+gap: 2.5rem;
+align-items: center;
+}
+.hero-kicker {
+text-transform: uppercase;
+font-size: 0.75rem;
+letter-spacing: 0.22em;
+color: #8b6837;
+}
+.hero h1 {
+font-size: clamp(2.1rem, 4vw, 3rem);
+margin: 0.85rem 0 0.4rem;
+color: #2b1b10;
+}
+.hero h1 span {
+color: #2f7f43;
+}
+.hero p {
+max-width: 34rem;
+font-size: 0.98rem;
+color: #5d4627;
+margin-bottom: 1rem;
+}
+.hero-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.45rem;
+margin-bottom: 1.4rem;
+font-size: 0.78rem;
+}
+.tag {
+padding: 0.28rem 0.7rem;
+border-radius: 999px;
+border: 1px solid #c8b38f;
+background: #fff8eb99;
+color: #5a4224;
+}
+.hero-actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.8rem;
+align-items: center;
+}
+.btn-primary {
+border-radius: 999px;
+border: none;
+padding: 0.75rem 1.4rem;
+background: #2f7f43;
+color: #fdfaf4;
+font-weight: 600;
+cursor: pointer;
+font-size: 0.95rem;
+box-shadow: 0 10px 18px rgba(23, 93, 44, 0.35);
+}
+.btn-outline {
+border-radius: 999px;
+border: 1px solid #8b6837;
+padding: 0.73rem 1.3rem;
+background: transparent;
+color: #5b3b20;
+cursor: pointer;
+font-size: 0.9rem;
+}
+.hero-note {
+font-size: 0.78rem;
+color: #7f6340;
+}
+
+.hero-card {
+background: #fef9f1;
+border-radius: 1.1rem;
+border: 1px solid #d2c0a6;
+padding: 1.1rem 1.2rem 1.2rem;
+box-shadow: 0 12px 26px rgba(118, 85, 50, 0.25);
+}
+.hero-card h2 {
+font-size: 1.05rem;
+margin-bottom: 0.6rem;
+color: #362214;
+}
+.now-playing-label {
+font-size: 0.78rem;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: #aa7b3b;
+margin-bottom: 0.35rem;
+}
+.now-playing-title {
+font-weight: 600;
+font-size: 0.95rem;
+color: #3a2412;
+}
+.now-playing-artist {
+font-size: 0.88rem;
+color: #7a5a34;
+}
+.show-strip {
+display: grid;
+grid-template-columns: repeat(2, minmax(0,1fr));
+gap: 0.5rem;
+margin-top: 0.9rem;
+font-size: 0.8rem;
+}
+.show-pill {
+border-radius: 0.8rem;
+background: #f4e4cc;
+border: 1px solid #d2c0a6;
+padding: 0.55rem 0.6rem;
+}
+.show-pill strong {
+display: block;
+font-size: 0.82rem;
+color: #3a2412;
+}
+.hero-small {
+font-size: 0.78rem;
+color: #7d6340;
+margin-top: 0.6rem;
+}
+
+/* ------- SECTION HEADERS ------- */
+.section-head {
+text-align: center;
+margin-bottom: 2.2rem;
+}
+.section-kicker {
+text-transform: uppercase;
+font-size: 0.78rem;
+letter-spacing: 0.24em;
+color: #8d6a3a;
+margin-bottom: 0.3rem;
+}
+.section-head h2 {
+font-size: 1.8rem;
+color: #2b1b10;
+margin-bottom: 0.25rem;
+}
+.section-head p {
+max-width: 32rem;
+margin: 0 auto;
+font-size: 0.92rem;
+color: #6b4d2a;
+}
+
+/* ------- ABOUT ------- */
+.about-grid {
+display: grid;
+grid-template-columns: minmax(0,1.25fr) minmax(0,1fr);
+gap: 2.2rem;
+align-items: flex-start;
+}
+.about-grid p {
+font-size: 0.95rem;
+color: #5d4627;
+margin-bottom: 0.9rem;
+}
+.about-list {
+list-style: none;
+font-size: 0.9rem;
+color: #6f5230;
+}
+.about-list li {
+margin-bottom: 0.4rem;
+padding-left: 1.1rem;
+position: relative;
+}
+.about-list li::before {
+content: "•";
+position: absolute;
+left: 0;
+color: #2f7f43;
+}
+.about-card {
+background: #fff7ea;
+border-radius: 1rem;
+border: 1px solid #d8c5a4;
+padding: 1rem 1.1rem 1.2rem;
+font-size: 0.88rem;
+}
+.about-card h3 {
+font-size: 1rem;
+margin-bottom: 0.5rem;
+color: #3a2412;
+}
+.pill-row {
+display: flex;
+flex-wrap: wrap;
+gap: 0.4rem;
+margin-top: 0.6rem;
+}
+.pill {
+font-size: 0.78rem;
+padding: 0.25rem 0.6rem;
+border-radius: 999px;
+background: #f1e0c1;
+color: #4e341d;
+border: 1px solid #d2c0a6;
+}
+
+/* ------- SHOWS ------- */
+.show-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0,1fr));
+gap: 1.3rem;
+}
+.show-card {
+background: #fff7ea;
+border-radius: 0.9rem;
+border: 1px solid #d2c0a6;
+padding: 1rem 0.9rem 1.1rem;
+font-size: 0.88rem;
+}
+.show-card h3 {
+font-size: 1rem;
+color: #3a2412;
+margin-bottom: 0.2rem;
+}
+.show-time {
+font-size: 0.8rem;
+color: #8b6837;
+margin-bottom: 0.4rem;
+}
+.show-desc {
+color: #6b4d2a;
+margin-bottom: 0.5rem;
+}
+.show-tag {
+font-size: 0.8rem;
+color: #2f7f43;
+}
+
+/* ------- LISTEN / PLAYER + REQUESTS ------- */
+.listen-grid {
+display: grid;
+grid-template-columns: minmax(0,1.1fr) minmax(0,1fr);
+gap: 2rem;
+align-items: flex-start;
+}
+.player-embed {
+background: #fff7ea;
+border-radius: 1rem;
+border: 1px solid #d2c0a6;
+padding: 0.9rem 0.9rem 1rem;
+}
+.player-embed iframe {
+width: 100%;
+max-width: 450px;
+height: 511px;
+border: 0;
+border-radius: 0.8rem;
+background: #1a1a1a;
+}
+.listen-notes {
+font-size: 0.9rem;
+color: #6b4d2a;
+margin-top: 0.5rem;
+}
+.listen-notes a {
+color: #2f7f43;
+text-decoration: underline;
+}
+
+.request-box {
+background: #fff7ea;
+border-radius: 1rem;
+border: 1px solid #d2c0a6;
+padding: 1.1rem 1rem 1.3rem;
+font-size: 0.9rem;
+}
+.request-box h3 {
+font-size: 1rem;
+color: #3a2412;
+margin-bottom: 0.4rem;
+}
+.field {
+margin-bottom: 0.75rem;
+}
+label {
+display: block;
+font-size: 0.82rem;
+color: #7a5a34;
+margin-bottom: 0.2rem;
+}
+input, textarea {
+width: 100%;
+border-radius: 0.6rem;
+border: 1px solid #c9b89a;
+padding: 0.55rem 0.6rem;
+font: inherit;
+font-size: 0.88rem;
+background: #fdf6eb;
+color: #3a2412;
+outline: none;
+}
+input:focus, textarea:focus {
+border-color: #2f7f43;
+box-shadow: 0 0 0 1px rgba(47,127,67,0.32);
+background: #fffdf8;
+}
+textarea {
+resize: vertical;
+min-height: 120px;
+}
+.small-hint {
+font-size: 0.78rem;
+color: #8a6b40;
+margin-top: 0.2rem;
+}
+
+/* ------- FOOTER ------- */
+footer {
+border-top: 1px solid #d1c1a5;
+padding: 1.3rem 0 1.6rem;
+color: #7a5a34;
+font-size: 0.82rem;
+background: #f9f2e6;
+}
+.footer-inner {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+gap: 0.7rem;
+align-items: center;
+}
+.footer-links {
+display: flex;
+gap: 0.9rem;
+flex-wrap: wrap;
+}
+.footer-links a {
+font-weight: 500;
+color: #5b3b20;
+}
+
+/* ------- RESPONSIVE ------- */
+@media (max-width: 860px) {
+nav ul {
+position: absolute;
+right: 1.25rem;
+top: 64px;
+background: #f6f0e4;
+padding: 0.75rem 1rem 0.9rem;
+border-radius: 0 0 0.8rem 0.8rem;
+flex-direction: column;
+align-items: flex-start;
+gap: 0.8rem;
+min-width: 190px;
+border: 1px solid #d1c1a5;
+display: none;
+}
+nav ul.open {
+display: flex;
+}
+.btn-nav {
+display: none;
+}
+.nav-toggle {
+display: block;
+}
+.hero-grid {
+grid-template-columns: minmax(0,1fr);
+}
+.hero-card {
+order: -1;
+}
+.about-grid,
+.listen-grid {
+grid-template-columns: minmax(0,1fr);
+}
+.show-grid {
+grid-template-columns: repeat(2, minmax(0,1fr));
+}
+}
+@media (max-width: 640px) {
+.show-grid {
+grid-template-columns: minmax(0,1fr);
+}
+.brand-text-main {
+font-size: 0.9rem;
+}
+.brand-text-sub {
+font-size: 0.72rem;
+}
+}
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="wrap nav-bar">
-      <div class="logo">
-        <div class="logo-mark">AR</div>
-        <div>
-          <div class="logo-text-main">Blue Grass Farm Radio</div>
-          <div class="logo-text-sub">Hosted by Adam Rideout</div>
-        </div>
-      </div>
+<!-- HEADER -->
+<header>
+<div class="wrap nav">
+<div class="brand">
+<div class="brand-logo">
+<!-- Upload your barn logo as "logo.jpg" in this repo -->
+<img src="logo.jpg" alt="Rideout's Bluegrass Farm Radio logo">
+</div>
+<div>
+<div class="brand-text-main">Rideout’s Bluegrass Farm Radio</div>
+<div class="brand-text-sub">Bluegrass &amp; Country from the Farm to Your Ears</div>
+</div>
+</div>
 
-      <nav>
-        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">?</button>
-        <ul id="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#shows">Shows</a></li>
-          <li><a href="#listen">How to Listen</a></li>
-          <li><a href="#request">Song Requests</a></li>
-        </ul>
-      </nav>
+<nav>
+<button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+<ul id="nav-links">
+<li><a href="#about">About</a></li>
+<li><a href="#shows">Shows</a></li>
+<li><a href="#listen">Listen</a></li>
+<li><a href="#contact">Requests</a></li>
+</ul>
+</nav>
 
-      <button class="btn-nav" onclick="scrollToListen()">Listen Live</button>
-    </div>
-  </header>
+<button class="btn-nav" onclick="scrollToListen()">Listen Live</button>
+</div>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="hero-kicker">Bluegrass · Country · Gospel</div>
-        <h1>Adam Rideout’s <span>Blue Grass Farm Radio</span></h1>
-        <p>
-          A home-grown bluegrass and country radio station streaming live through Live365,
-          bringing you classic cuts, new picks, and front-porch favorites 24/7.
-        </p>
+<!-- HERO -->
+<section class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="hero-kicker">Panama City · Florida · USA</div>
+<h1>Rideout’s <span>Bluegrass Farm Radio</span></h1>
+<p>
+Bluegrass &amp; country from the farm to your ears — broadcasting online from Panama City,
+Florida, through Live365. Fiddle tunes, banjo rolls, gospel harmonies, and front-porch
+stories all in one station.
+</p>
 
-        <div class="hero-tags">
-          <span class="tag">Streaming on Live365</span>
-          <span class="tag">Live &amp; recorded shows</span>
-          <span class="tag">Listener requests</span>
-        </div>
+<div class="hero-tags">
+<span class="tag">Streaming on Live365</span>
+<span class="tag">Bluegrass · Country · Gospel</span>
+<span class="tag">Family-friendly station</span>
+</div>
 
-        <div class="hero-actions">
-          <button class="btn-primary" onclick="scrollToListen()">? Listen Live</button>
-          <button class="btn-outline" onclick="document.getElementById('shows').scrollIntoView({behavior:'smooth'})">
-            View Shows &amp; Schedule
-          </button>
-          <span class="hero-note">Broadcasted from Live 360 / Live365.</span>
-        </div>
-      </div>
+<div class="hero-actions">
+<button class="btn-primary" onclick="scrollToListen()">▶ Listen Live</button>
+<button class="btn-outline" onclick="document.getElementById('shows').scrollIntoView({behavior:'smooth'})">
+View Show Schedule
+</button>
+<span class="hero-note">Tune in from any phone, tablet, or computer.</span>
+</div>
+</div>
 
-      <aside class="hero-card" aria-label="Radio snapshot">
-        <h2>On Air Right Now</h2>
+<aside class="hero-card" aria-label="Radio snapshot">
+<h2>On Air Right Now</h2>
+<div class="now-playing">
+<div class="now-playing-label">Example placeholder</div>
+<div class="now-playing-title">“Blue Moon of Kentucky”</div>
+<div class="now-playing-artist">Bill Monroe</div>
+</div>
 
-        <div class="now-playing">
-          <div class="now-playing-label">Example placeholder – replace with Live365 widget</div>
-          <div class="now-playing-title">“Blue Moon of Kentucky”</div>
-          <div class="now-playing-artist">Bill Monroe</div>
-        </div>
+<div class="show-strip" style="margin-top:0.9rem;">
+<div class="show-pill">
+<strong>Morning Pasture</strong>
+Mon–Fri · 7:00–10:00 AM · Easy, classic bluegrass.
+</div>
+<div class="show-pill">
+<strong>Saturday Barn Dance</strong>
+Sat · 7:00–10:00 PM · Up-tempo picks and requests.
+</div>
+</div>
 
-        <div class="show-strip">
-          <div class="show-pill">
-            <strong>Morning Pasture</strong>
-            7:00–10:00 AM · Easy, classic bluegrass
-          </div>
-          <div class="show-pill">
-            <strong>Saturday Barn Dance</strong>
-            Sat night · Up-tempo picks and requests
-          </div>
-        </div>
+<p class="hero-small">
+Now-playing details come from your Live365 player. This card is just a friendly snapshot
+for visitors.
+</p>
+</aside>
+</div>
+</section>
 
-        <p class="hero-player-note">
-          This panel is static for now. When you’re ready, drop in your official Live365
-          “Now Playing” or Player embed right here.
-        </p>
-      </aside>
-    </div>
-  </section>
+<!-- ABOUT -->
+<section id="about">
+<div class="wrap">
+<div class="section-head">
+<div class="section-kicker">About the Station</div>
+<h2>Bluegrass Radio from a Working Farm</h2>
+<p>
+Rideout’s Bluegrass Farm Radio is built around the sound of front-porch picking, barn
+dances, and Sunday-morning gospel — all from Panama City, Florida.
+</p>
+</div>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-kicker">About the Station</div>
-        <h2>Bluegrass Radio from a Real Bluegrass Farm</h2>
-        <p>
-          Built by a working farm family, this station keeps the spirit of front-porch picking,
-          church-house singing, and country storytelling alive on the air.
-        </p>
-      </div>
+<div class="about-grid">
+<div>
+<p>
+From Monroe-style classics to modern bluegrass, traditional country, and heartfelt
+gospel, Rideout’s Bluegrass Farm Radio keeps one foot in the past and one in the
+present. It’s the kind of station you can leave on in the barn, the truck, or the
+kitchen all day long.
+</p>
+<p>
+The station streams through Live365, so you can listen anywhere you have an internet
+connection — phone, tablet, computer, or smart speaker. Just search for
+<strong>“Rideout’s Bluegrass Farm”</strong> on Live365 or hit the Listen Live player
+below.
+</p>
+<ul class="about-list">
+<li>Dedicated to bluegrass, classic country, and gospel.</li>
+<li>Family-friendly lyrics and programming.</li>
+<li>Listener requests and shout-outs welcome.</li>
+<li>Broadcasted online from Panama City, Florida.</li>
+</ul>
+</div>
 
-      <div class="about-grid">
-        <div>
-          <p>
-            Adam Rideout’s Blue Grass Farm Radio is an online station dedicated to traditional and
-            modern bluegrass, classic country, and a touch of gospel and Americana. Broadcasted live
-            through <strong>Live365 / Live 360</strong>, you can tune in from anywhere with a phone,
-            tablet, or computer.
-          </p>
-          <p>
-            From old-time fiddle tunes to new-grass arrangements, the goal is simple: play music
-            that feels like sitting on the porch after a long day’s work, with good friends and a
-            cool breeze through the trees.
-          </p>
+<aside class="about-card">
+<h3>Station Snapshot</h3>
+<p><strong>Name:</strong> Rideout’s Bluegrass Farm Radio</p>
+<p><strong>Tagline:</strong> Bluegrass &amp; Country from the Farm to Your Ears</p>
+<p><strong>Location:</strong> Panama City, Florida</p>
+<p><strong>Platform:</strong> Live365 Internet Radio</p>
 
-          <ul class="about-list">
-            <li>24/7 stream hosted on Live365 (Live 360 platform).</li>
-            <li>Family-friendly programming and lyrics.</li>
-            <li>Mix of classic legends and independent artists.</li>
-            <li>Listener requests and shout-outs welcome.</li>
-          </ul>
-        </div>
+<div class="pill-row">
+<span class="pill">24/7 Streaming</span>
+<span class="pill">Bluegrass &amp; Country</span>
+<span class="pill">Gospel Hour</span>
+<span class="pill">Listener Requests</span>
+</div>
+</aside>
+</div>
+</div>
+</section>
 
-        <aside class="about-card">
-          <h3>Station Snapshot</h3>
-          <p>
-            Update this box with your real details (location, schedule, and anything else you like).
-          </p>
-          <p><strong>Broadcast Platform:</strong> Live365 / Live 360 Internet radio</p>
-          <p><strong>Location:</strong> [City, State – for example Panama City, FL]</p>
-          <p><strong>Format:</strong> Bluegrass, classic country, gospel, Americana</p>
+<!-- SHOWS -->
+<section id="shows">
+<div class="wrap">
+<div class="section-head">
+<div class="section-kicker">Shows &amp; Schedule</div>
+<h2>Regular Programs on Rideout’s Bluegrass Farm Radio</h2>
+<p>
+Times are shown in local Panama City, Florida time. Adjust as needed for your listeners.
+</p>
+</div>
 
-          <div class="pill-row">
-            <span class="pill">24/7 Streaming</span>
-            <span class="pill">Listener Requests</span>
-            <span class="pill">Indie-Friendly</span>
-            <span class="pill">Family Station</span>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </section>
+<div class="show-grid">
+<article class="show-card">
+<h3>Morning Pasture</h3>
+<div class="show-time">Mon–Fri · 7:00–10:00 AM</div>
+<p class="show-desc">
+Easy-going bluegrass and country to start the day — banjos, fiddles, coffee, and a
+sunrise over the fields.
+</p>
+<div class="show-tag">Perfect for chores, work, or the drive in.</div>
+</article>
 
-  <!-- SHOWS & SCHEDULE -->
-  <section id="shows">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-kicker">Shows &amp; Schedule</div>
-        <h2>Regular Programs on Blue Grass Farm Radio</h2>
-        <p>
-          Customize these show names and times to match your real schedule. This is just a starting
-          layout.
-        </p>
-      </div>
+<article class="show-card">
+<h3>Front Porch Pickin’</h3>
+<div class="show-time">Mon–Fri · 5:00–7:00 PM</div>
+<p class="show-desc">
+Drive-time traditionals, standards, and a few modern cuts to close out the workday with
+a smile.
+</p>
+<div class="show-tag">Call-ins, dedications, and shout-outs.</div>
+</article>
 
-      <div class="show-grid">
-        <article class="show-card">
-          <h3>Morning Pasture</h3>
-          <div class="show-time">Mon–Fri · 7:00–10:00 AM</div>
-          <p class="show-desc">
-            Easy-going bluegrass and country to start the day — banjos, fiddles, and coffee.
-          </p>
-          <div class="show-tag">Perfect for work, barn chores, or the drive in.</div>
-        </article>
+<article class="show-card">
+<h3>Saturday Barn Dance</h3>
+<div class="show-time">Saturday · 7:00–10:00 PM</div>
+<p class="show-desc">
+Up-tempo bluegrass, dance tunes, and live-feeling jams to kick off Saturday night —
+crank it up and clear the living room.
+</p>
+<div class="show-tag">High-energy fiddle and banjo.</div>
+</article>
 
-        <article class="show-card">
-          <h3>Front Porch Pickin’</h3>
-          <div class="show-time">Mon–Fri · 5:00–7:00 PM</div>
-          <p class="show-desc">
-            Drive-time traditionals, bluegrass standards, and a few modern cuts to close out the day.
-          </p>
-          <div class="show-tag">Call-ins, dedications, and shout-outs.</div>
-        </article>
+<article class="show-card">
+<h3>Sunday Gospel Hour</h3>
+<div class="show-time">Sunday · 8:00–9:00 AM</div>
+<p class="show-desc">
+Bluegrass and country gospel songs to lift the spirit and set the tone for the week.
+</p>
+<div class="show-tag">Harmonies, hymns, and heartfelt lyrics.</div>
+</article>
 
-        <article class="show-card">
-          <h3>Saturday Barn Dance</h3>
-          <div class="show-time">Saturday · 7:00–10:00 PM</div>
-          <p class="show-desc">
-            Up-tempo bluegrass, dance tunes, and live-feeling jams to kick off Saturday night.
-          </p>
-          <div class="show-tag">Turn it up and clear the living room.</div>
-        </article>
+<article class="show-card">
+<h3>Deep Roots</h3>
+<div class="show-time">Thu · 8:00–9:30 PM</div>
+<p class="show-desc">
+A look back at the roots of bluegrass and country — stories behind the songs, the
+pickers, and the legends.
+</p>
+<div class="show-tag">History, liner notes, and deep cuts.</div>
+</article>
 
-        <article class="show-card">
-          <h3>Sunday Gospel Hour</h3>
-          <div class="show-time">Sunday · 8:00–9:00 AM</div>
-          <p class="show-desc">
-            Bluegrass and country gospel songs to lift the spirit and calm the mind.
-          </p>
-          <div class="show-tag">Traditional and modern gospel picks.</div>
-        </article>
+<article class="show-card">
+<h3>Open Pasture</h3>
+<div class="show-time">Anytime · Auto-Rotation</div>
+<p class="show-desc">
+Open rotation for requests, new artists, and surprise sets. When no show is scheduled,
+Open Pasture keeps the station rolling.
+</p>
+<div class="show-tag">You never know what’s next.</div>
+</article>
+</div>
+</div>
+</section>
 
-        <article class="show-card">
-          <h3>Deep Roots</h3>
-          <div class="show-time">Thu · 8:00–9:30 PM</div>
-          <p class="show-desc">
-            A look back at the roots of bluegrass and country, with stories about the artists.
-          </p>
-          <div class="show-tag">History, liner notes, and deep cuts.</div>
-        </article>
+<!-- LISTEN & REQUESTS -->
+<section id="listen">
+<div class="wrap">
+<div class="section-head">
+<div class="section-kicker">How to Listen</div>
+<h2>Tune in to Rideout’s Bluegrass Farm Radio</h2>
+<p>
+Use the player below to listen right on this page, or open the station directly on
+Live365.
+</p>
+</div>
 
-        <article class="show-card">
-          <h3>Open Pasture</h3>
-          <div class="show-time">Anytime · Unsheduled Blocks</div>
-          <p class="show-desc">
-            Open rotation with listener requests, new artists, and surprise themes.
-          </p>
-          <div class="show-tag">You never know what’s coming next.</div>
-        </article>
-      </div>
-    </div>
-  </section>
+<div class="listen-grid">
+<!-- PLAYER -->
+<div>
+<div class="player-embed">
+<h3 style="font-size:1rem;margin-bottom:0.5rem;color:#3a2412;">Listen Live</h3>
 
-  <!-- HOW TO LISTEN & REQUESTS -->
-  <section id="listen">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-kicker">How to Listen</div>
-        <h2>Tune in to Blue Grass Farm Radio</h2>
-        <p>
-          Use the player below, or open the stream directly in the Live365 app or your browser.
-        </p>
-      </div>
+<!-- LIVE365 WIDGET – your code -->
+<iframe width="450" height="511" frameborder="0"
+src="https://live365.com/embeds/v1/played/a13243?s=md&m=dark">
+</iframe>
 
-      <div class="listen-grid">
-        <div>
-          <h3 style="margin-bottom:0.7rem;">1. Listen Live Player</h3>
+<p class="listen-notes">
+If the player doesn’t load, you can open the station directly on Live365:
+<br>
+<a href="https://live365.com/station/Rideout's-Bluegrass-Farm-a13243"
+target="_blank" rel="noopener noreferrer">
+Rideout’s Bluegrass Farm on Live365
+</a>
+</p>
+</div>
+</div>
 
-          <!-- ===========================
-               LIVE365 / LIVE 360 PLAYER EMBED
-               Replace the iframe src below with the official embed code from your Live365 station.
-               =========================== -->
-          <div style="background:#050b18;border-radius:1rem;border:1px solid rgba(255,255,255,0.08);padding:0.75rem 0.75rem 0.9rem;margin-bottom:1rem;">
-            <div style="font-size:0.85rem;color:#c3cff1;margin-bottom:0.4rem;">
-              Embedded player placeholder – drop your official Live365 code here.
-            </div>
+<!-- REQUESTS / CONTACT -->
+<div id="contact" class="request-box">
+<h3>Song Requests &amp; Shout-Outs</h3>
+<p style="margin-bottom:0.7rem;">
+Have a favorite song or artist you’d like to hear? Send a request or a shout-out message
+using the form below.
+</p>
 
-            <!-- Example placeholder iframe (replace with real one) -->
-            <iframe
-            title="Rideout's Bluegrass Farm - Live365 Player"
-            src="https://live365.com/embed/player.html?station=a13243&s=xl&m=dark"
-            style="width:100%;height:296px;border:0;border-radius:0.8rem;background:#020515;"
-            allow="autoplay">
-          </iframe>
-          </div>
+<form onsubmit="handleRequest(event)">
+<div class="field">
+<label for="req-name">Your Name</label>
+<input id="req-name" name="name" type="text" placeholder="What should we call you?" required>
+</div>
 
-          <ul class="steps">
-            <li>Get your official “Web Player” or “Embed Player” code from your Live365 / Live 360 station dashboard.</li>
-            <li>Replace the <code>src="https://example.com/your-live365-player"</code> line above with your real player URL.</li>
-            <li>Save the file and refresh the page — your live radio player should appear here.</li>
-          </ul>
+<div class="field">
+<label for="req-song">Song / Artist</label>
+<input id="req-song" name="song" type="text" placeholder="Song title &amp; artist name" required>
+</div>
 
-          <h3 style="margin:1.5rem 0 0.6rem;">2. Open in App or Browser</h3>
-          <ul class="steps">
-            <li>Search for <strong>“Adam Rideout’s Blue Grass Farm Radio”</strong> inside the Live365 app.</li>
-            <li>Or share your direct station link here: <span style="color:#4bffb3;">[paste your station URL]</span>.</li>
-          </ul>
-        </div>
+<div class="field">
+<label for="req-message">Message / Shout-Out (optional)</label>
+<textarea id="req-message" name="message"
+placeholder="Who’s it for, or what do you want to say on air?"></textarea>
+</div>
 
-        <!-- SONG REQUESTS -->
-        <div id="request" class="request-box">
-          <h3 style="margin-bottom:0.4rem;">Song Requests &amp; Shout-Outs</h3>
-          <p style="font-size:0.88rem;color:#c2ccf1;margin-bottom:0.7rem;">
-            This is a demo form. When you’re ready, hook it up to an email address or simple backend
-            so you can receive requests from listeners.
-          </p>
+<button class="btn-primary" type="submit">Send Request (Demo)</button>
+<div id="request-status" class="small-hint"></div>
 
-          <form onsubmit="handleRequest(event)">
-            <div class="field">
-              <label for="name">Your Name</label>
-              <input id="name" name="name" type="text" placeholder="What should we call you?" required>
-            </div>
-            <div class="field">
-              <label for="song">Song / Artist</label>
-              <input id="song" name="song" type="text" placeholder="Song title &amp; artist name" required>
-            </div>
-            <div class="field">
-              <label for="message">Message / Shout-Out (optional)</label>
-              <textarea id="message" name="message" placeholder="Who’s this for, or what do you want to say on air?"></textarea>
-            </div>
-            <button class="btn-primary" type="submit">Send Request (Demo)</button>
-            <div id="request-status" class="small-hint"></div>
-            <div class="small-hint">
-              To make this real, connect the form to email or a simple script on your hosting.
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="small-hint" style="margin-top:0.5rem;">
+This form is a front-end demo only. To receive real requests, connect it to an email
+service or backend that forwards messages to your inbox.
+</div>
+</form>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="wrap footer-inner">
-      <div>
-        &copy; <span id="year"></span> Adam Rideout’s Blue Grass Farm Radio. All rights reserved.
-      </div>
-      <div class="footer-links">
-        <a href="#about">About</a>
-        <a href="#shows">Shows</a>
-        <a href="#listen">Listen</a>
-        <a href="#request">Requests</a>
-      </div>
-    </div>
-  </footer>
+<div style="margin-top:1.1rem;">
+<strong>Contact Email:</strong>
+<!-- Replace this placeholder with your real email address -->
+<span>your-email@example.com</span>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-  <script>
-    function toggleNav() {
-      const navLinks = document.getElementById('nav-links');
-      navLinks.classList.toggle('open');
-    }
+<!-- FOOTER -->
+<footer>
+<div class="wrap footer-inner">
+<div>
+&copy; <span id="year"></span> Rideout’s Bluegrass Farm Radio. All rights reserved.
+</div>
+<div class="footer-links">
+<a href="#about">About</a>
+<a href="#shows">Shows</a>
+<a href="#listen">Listen</a>
+<a href="#contact">Requests</a>
+</div>
+</div>
+</footer>
 
-    function scrollToListen() {
-      const section = document.getElementById('listen');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+<script>
+function toggleNav() {
+const navLinks = document.getElementById('nav-links');
+navLinks.classList.toggle('open');
+}
 
-    function handleRequest(event) {
-      event.preventDefault();
-      const status = document.getElementById('request-status');
-      status.textContent = "Thanks! This is a demo only – connect this form to your email or backend to receive real requests.";
-    }
+function scrollToListen() {
+const section = document.getElementById('listen');
+if (section) section.scrollIntoView({ behavior: 'smooth' });
+}
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+function handleRequest(event) {
+event.preventDefault();
+const status = document.getElementById('request-status');
+status.textContent =
+"Thanks for your request! This demo form isn’t wired up yet—ask your web helper to connect it to your email.";
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
+
+
 
 
