@@ -925,6 +925,7 @@ Live365.
 </p>
 </div>
 
+<!-- ROW 1: PLAYER + REQUEST FORM -->
 <div class="listen-grid">
 <!-- PLAYER -->
 <div>
@@ -934,22 +935,24 @@ Listen Live
 <a class="live365-pill"
 href="https://live365.com/station/Rideout's-Bluegrass-Farm-a13243"
 target="_blank" rel="noopener noreferrer">
-LIVE365
+<span>LIVE365</span>
 </a>
 </h3>
 
-<!-- MAIN LIVE365 PLAYER -->
+<!-- LIVE365 PLAYER WIDGET -->
 <iframe width="100%" height="316" frameborder="0"
 src="https://live365.com/embeds/v1/player/a13243?s=md&m=dark&c=mp3">
 </iframe>
 
 <p class="listen-notes">
-If the player doesn’t load, you can open the station directly on Live365:<br>
+If the player doesn’t load, you can open the station directly on Live365:
+<br>
 <a href="https://live365.com/station/Rideout's-Bluegrass-Farm-a13243"
 target="_blank" rel="noopener noreferrer">
 Rideout’s Bluegrass Farm on Live365
 </a>
 </p>
+</div>
 </div>
 
 <!-- REQUESTS / CONTACT -->
@@ -960,7 +963,8 @@ Have a favorite song or artist you’d like to hear? Send a request or a shout-o
 the form below.
 </p>
 
-<form action="mailto:rideoutbluegrass@gmail.com" method="POST" enctype="text/plain">
+<!-- still demo-only; we can wire to your email later -->
+<form onsubmit="handleRequest(event)">
 <div class="field">
 <label for="req-name">Your Name</label>
 <input id="req-name" name="name" type="text" placeholder="What should we call you?" required>
@@ -977,17 +981,18 @@ the form below.
 placeholder="Who’s it for, or what do you want to say on air?"></textarea>
 </div>
 
-<button class="btn-nav" type="submit">Email Your Request</button>
+<button class="btn-nav" type="submit">Send Request (Demo)</button>
+<div id="request-status" class="small-hint"></div>
 
 <div class="small-hint" style="margin-top:0.5rem;">
-Clicking “Email Your Request” will open your email app with this info filled in. Just hit send
-to send your request to the station.
+This form is a front-end demo only. When your station email is ready, we’ll hook this
+up so requests go straight to your inbox or a Google Sheet.
 </div>
 </form>
 </div>
 </div>
 
-<!-- DEVICE INSTRUCTIONS -->
+<!-- ROW 2: DEVICE INSTRUCTIONS (FULL WIDTH) -->
 <div class="device-grid" aria-label="How to listen on devices">
 <div class="device-card">
 <h4>Listen on Alexa</h4>
@@ -1102,6 +1107,7 @@ if (elt) elt.textContent = count.toLocaleString();
 </script>
 </body>
 </html>
+
 
 
 
