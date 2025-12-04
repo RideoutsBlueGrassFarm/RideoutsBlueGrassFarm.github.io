@@ -5,7 +5,18 @@
 <title>Rideout’s Bluegrass Farm Radio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description"
-content="Rideout’s Bluegrass Farm Radio – Bluegrass & Country from the Farm to Your Ears. Broadcasting from Panama City, Florida via Live365.">
+content="Rideout’s Bluegrass Farm Radio – a relaxed, father–son bluegrass and country station broadcasting from Panama City, Florida via Live365.">
+
+<!-- Optional: Google Analytics 4 (fill in your measurement ID where it says G-XXXXXXX) -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXX');
+</script>
+-->
 
 <style>
 /* ------- RESET ------- */
@@ -16,7 +27,21 @@ padding: 0;
 }
 body {
 font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-background: radial-gradient(circle at 10% -10%, #5b3414 0, #1a0d06 55%, #0c0603 100%);
+/* layered wood texture */
+background:
+repeating-linear-gradient(
+90deg,
+#3b1d0b 0,
+#3b1d0b 4px,
+#45210e 4px,
+#45210e 8px,
+#4f2611 8px,
+#4f2611 12px,
+#3b1d0b 12px,
+#3b1d0b 16px
+),
+linear-gradient(180deg, #3b1b09, #1a0d06 60%, #0c0603 100%);
+background-size: 220px 100%, 100% 100%;
 color: #f6e9d2;
 line-height: 1.6;
 }
@@ -129,6 +154,26 @@ cursor: pointer;
 color: #ffe6b8;
 }
 
+/* Tiny Live365 badge */
+.live365-pill {
+display: inline-flex;
+align-items: center;
+gap: 4px;
+font-size: 0.7rem;
+padding: 0.18rem 0.5rem;
+border-radius: 999px;
+background: #0b1020;
+color: #e3f3ff;
+border: 1px solid #22c55e;
+margin-left: 0.4rem;
+}
+.live365-pill span {
+display: inline-block;
+padding: 0 0.2rem;
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+
 /* ------- GUITAR BAR (STRINGS + FRETS) ------- */
 .guitar-bar {
 height: 38px;
@@ -170,10 +215,21 @@ border-bottom: 1px solid rgba(255, 214, 153, 0.35);
 /* ------- HERO ------- */
 .hero {
 background:
-radial-gradient(circle at 0% 0%, #f4c76b 0, transparent 55%),
-radial-gradient(circle at 100% 0%, #f8e0b5 0, transparent 60%),
-linear-gradient(180deg, #3b1b09, #1b0d05 55%, #140803 100%);
+radial-gradient(circle at 20% 0%, #f7d37a66 0, transparent 55%),
+radial-gradient(circle at 80% 0%, #f3c16266 0, transparent 55%),
+repeating-linear-gradient(
+180deg,
+#4a2511 0,
+#4a2511 10px,
+#5a2e16 10px,
+#5a2e16 20px,
+#6b361a 20px,
+#6b361a 30px,
+#5a2e16 30px,
+#5a2e16 40px
+);
 border-bottom: 1px solid #7e5531;
+box-shadow: 0 24px 40px rgba(0,0,0,0.7);
 }
 .hero-grid {
 display: grid;
@@ -427,6 +483,10 @@ padding: 1rem 1rem 1.2rem;
 }
 .player-embed h3 {
 color: #ffe6b8;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 0.4rem;
 }
 .player-embed iframe {
 width: 100%;
@@ -485,13 +545,46 @@ color: #f1c27d;
 margin-top: 0.2rem;
 }
 
+/* ------- DEVICE INSTRUCTIONS ------- */
+.device-grid {
+margin-top: 2.4rem;
+display: grid;
+grid-template-columns: repeat(3, minmax(0,1fr));
+gap: 1.2rem;
+font-size: 0.88rem;
+}
+.device-card {
+background: linear-gradient(145deg, #2b1309, #180a04);
+border-radius: 0.9rem;
+border: 1px solid #8b5b32;
+padding: 0.9rem 0.9rem 1rem;
+}
+.device-card h4 {
+font-size: 0.96rem;
+margin-bottom: 0.35rem;
+color: #ffe6b8;
+}
+.device-card ol,
+.device-card ul {
+padding-left: 1.2rem;
+color: #f3d39c;
+}
+.device-card li {
+margin-bottom: 0.25rem;
+}
+
 /* ------- FOOTER ------- */
 footer {
 border-top: 1px solid #7e5531;
-padding: 1.3rem 0 1.6rem;
+padding: 1.8rem 0 2rem;
 color: #f1c27d;
 font-size: 0.82rem;
-background: radial-gradient(circle at 50% 0%, #3a1b0a 0, #120804 70%);
+background:
+linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.95)),
+radial-gradient(circle at 10% -40%, #f4c76b33 0, transparent 60%),
+linear-gradient(90deg, #3a1b0a, #1a0b05, #3a1b0a);
+position: relative;
+overflow: hidden;
 }
 .footer-inner {
 display: flex;
@@ -508,6 +601,46 @@ flex-wrap: wrap;
 .footer-links a {
 font-weight: 500;
 color: #ffd577;
+}
+.footer-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 1.2rem;
+align-items: center;
+margin-top: 0.6rem;
+font-size: 0.8rem;
+}
+.stat-pill {
+display: inline-flex;
+align-items: center;
+gap: 0.35rem;
+padding: 0.25rem 0.55rem;
+border-radius: 999px;
+background: rgba(0,0,0,0.6);
+border: 1px solid #8b5b32;
+color: #ffe6b8;
+}
+
+/* Silhouette + notes in footer */
+.footer-art {
+position: absolute;
+inset: auto 0 0 0;
+height: 70px;
+pointer-events: none;
+background:
+/* music notes as little blobs */
+radial-gradient(circle at 8% 20%, #ffd577 0, transparent 16%),
+radial-gradient(circle at 20% 40%, #ffd577 0, transparent 18%),
+radial-gradient(circle at 45% 25%, #ffd577 0, transparent 16%),
+radial-gradient(circle at 70% 35%, #ffd577 0, transparent 15%),
+radial-gradient(circle at 86% 18%, #ffd577 0, transparent 14%),
+/* barn silhouette */
+linear-gradient(to top,
+#000000 0,
+#000000 35px,
+transparent 35px
+);
+opacity: 0.3;
 }
 
 /* ------- RESPONSIVE ------- */
@@ -548,6 +681,9 @@ grid-template-columns: minmax(0,1fr);
 .show-grid {
 grid-template-columns: repeat(2, minmax(0,1fr));
 }
+.device-grid {
+grid-template-columns: minmax(0,1fr);
+}
 }
 @media (max-width: 640px) {
 .show-grid {
@@ -569,7 +705,6 @@ font-size: 0.72rem;
 <div class="wrap nav">
 <div class="brand">
 <div class="brand-logo">
-<!-- Upload your barn logo as "logo.jpg" in this repo -->
 <img src="logo.jpeg" alt="Rideout's Bluegrass Farm Radio logo">
 </div>
 <div>
@@ -602,15 +737,15 @@ font-size: 0.72rem;
 <div class="hero-kicker">Panama City · Florida · USA</div>
 <h1>Rideout’s <span>Bluegrass Farm Radio</span></h1>
 <p>
-Bluegrass &amp; country from the farm to your ears — broadcasting online from Panama City,
-Florida, through Live365. Fiddle tunes, banjo rolls, gospel harmonies, and front-porch
-stories all in one station.
+A relaxed, father–son bluegrass and country station broadcasting online from Panama City,
+Florida through Live365. Fiddle tunes, banjo rolls, gospel harmonies, and front-porch
+stories all in one laid-back stream.
 </p>
 
 <div class="hero-tags">
-<span class="tag">Streaming on Live365</span>
+<span class="tag">Family-run · Father &amp; Son</span>
 <span class="tag">Bluegrass · Country · Gospel</span>
-<span class="tag">Family-friendly station</span>
+<span class="tag">Streaming on Live365</span>
 </div>
 
 <div class="hero-actions">
@@ -618,7 +753,7 @@ stories all in one station.
 <button class="btn-outline" onclick="document.getElementById('shows').scrollIntoView({behavior:'smooth'})">
 View Show Schedule
 </button>
-<span class="hero-note">Tune in from any phone, tablet, or computer.</span>
+<span class="hero-note">Tune in from any phone, tablet, computer, or TV.</span>
 </div>
 </div>
 
@@ -654,28 +789,32 @@ for visitors.
 <div class="wrap">
 <div class="section-head">
 <div class="section-kicker">About the Station</div>
-<h2>Bluegrass Radio from a Working Farm</h2>
+<h2>Bluegrass Radio from a Father–Son Farm Team</h2>
 <p>
-Rideout’s Bluegrass Farm Radio is built around the sound of front-porch picking, barn
-dances, and Sunday-morning gospel — all from Panama City, Florida.
+Rideout’s Bluegrass Farm Radio is run by a father and son who love the sound of strings,
+stories, and a slower pace of life.
 </p>
 </div>
 
 <div class="about-grid">
 <div>
 <p>
-From Monroe-style classics to modern bluegrass, traditional country, and heartfelt
+The idea was simple: take the feeling of picking tunes on the porch or in the barn and
+send it out across the world. No rush, no noise, just relaxed bluegrass and country you
+can leave on all day while you work, drive, or wind down.
+</p>
+<p>
+From Monroe-style classics to modern pickers, traditional country to Sunday-morning
 gospel, Rideout’s Bluegrass Farm Radio keeps one foot in the past and one in the
-present. It’s the kind of station you can leave on in the barn, the truck, or the
-kitchen all day long.
+present. It’s a family-run station with a friendly, laid-back feel — like visiting
+neighbors who always have another song ready.
 </p>
 <p>
 The station streams through Live365, so you can listen anywhere you have an internet
-connection — phone, tablet, computer, or smart speaker. Just search for
-<strong>“Rideout’s Bluegrass Farm”</strong> on Live365 or hit the Listen Live player
-below.
+connection — phone, tablet, computer, or smart speaker.
 </p>
 <ul class="about-list">
+<li>Father–son station with a relaxed, front-porch feel.</li>
 <li>Dedicated to bluegrass, classic country, and gospel.</li>
 <li>Family-friendly lyrics and programming.</li>
 <li>Listener requests and shout-outs welcome.</li>
@@ -688,6 +827,7 @@ below.
 <p><strong>Name:</strong> Rideout’s Bluegrass Farm Radio</p>
 <p><strong>Tagline:</strong> Bluegrass &amp; Country from the Farm to Your Ears</p>
 <p><strong>Location:</strong> Panama City, Florida</p>
+<p><strong>Run by:</strong> Father &amp; Son Team</p>
 <p><strong>Platform:</strong> Live365 Internet Radio</p>
 
 <div class="pill-row">
@@ -707,9 +847,7 @@ below.
 <div class="section-head">
 <div class="section-kicker">Shows &amp; Schedule</div>
 <h2>Regular Programs on Rideout’s Bluegrass Farm Radio</h2>
-<p>
-Times are shown in local Panama City, Florida time.
-</p>
+<p>Times are shown in local Panama City, Florida time.</p>
 </div>
 
 <div class="show-grid">
@@ -791,7 +929,14 @@ Live365.
 <!-- PLAYER -->
 <div>
 <div class="player-embed">
-<h3 style="font-size:1rem;margin-bottom:0.5rem;">Listen Live</h3>
+<h3>
+Listen Live
+<a class="live365-pill"
+href="https://live365.com/station/Rideout's-Bluegrass-Farm-a13243"
+target="_blank" rel="noopener noreferrer">
+<span>LIVE365</span>
+</a>
+</h3>
 
 <!-- LIVE365 WIDGET – your code -->
 <iframe width="450" height="511" frameborder="0"
@@ -838,15 +983,51 @@ placeholder="Who’s it for, or what do you want to say on air?"></textarea>
 <div id="request-status" class="small-hint"></div>
 
 <div class="small-hint" style="margin-top:0.5rem;">
-This form is a front-end demo only. To receive real requests, connect it to an email
-service or backend that forwards messages to your inbox.
+This form is a front-end demo only. When your station email is ready, we’ll hook this
+up so requests go straight to your inbox or a Google Sheet.
 </div>
 </form>
-
-<div style="margin-top:1.1rem;">
-<strong>Contact Email:</strong>
-<span>your-email@example.com</span>
 </div>
+</div>
+
+<!-- DEVICE INSTRUCTIONS -->
+<div class="device-grid" aria-label="How to listen on devices">
+<div class="device-card">
+<h4>Listen on Alexa</h4>
+<ol>
+<li>Make sure the <strong>Live365</strong> skill is enabled in your Alexa app.</li>
+<li>Say: <strong>“Alexa, open Live365.”</strong></li>
+<li>Then say: <strong>“Play Rideout’s Bluegrass Farm.”</strong></li>
+</ol>
+<p class="small-hint">
+If Alexa has trouble, try: “Play the station Rideout’s Bluegrass Farm on Live365.”
+</p>
+</div>
+
+<div class="device-card">
+<h4>Listen on Google / Chromecast</h4>
+<ol>
+<li>Open the <strong>Live365</strong> website or app on your phone or Chrome browser.</li>
+<li>Start playing <strong>Rideout’s Bluegrass Farm</strong>.</li>
+<li>Use the <strong>Cast</strong> button to cast to any Google Home, Nest, or Chromecast device.</li>
+</ol>
+<p class="small-hint">
+You can also cast this webpage’s audio if your browser supports it.
+</p>
+</div>
+
+<div class="device-card">
+<h4>Listen on Smart TV</h4>
+<ul>
+<li>Open the web browser on your TV and visit:
+<br><strong>rideoutsbluegrassfarm.github.io</strong>
+</li>
+<li>Or open the TV’s app store and look for <strong>Live365</strong> (if available).</li>
+<li>Search for <strong>Rideout’s Bluegrass Farm</strong> and start listening.</li>
+</ul>
+<p class="small-hint">
+Any device that can open a browser and play audio can tune into the farm.
+</p>
 </div>
 </div>
 </div>
@@ -854,9 +1035,10 @@ service or backend that forwards messages to your inbox.
 
 <!-- FOOTER -->
 <footer>
-<div class="wrap footer-inner">
+<div class="wrap">
+<div class="footer-inner">
 <div>
-&copy; <span id="year"></span> Rideout’s Bluegrass Farm Radio. All rights reserved.
+&copy; <span id="year"></span> Rideout’s Bluegrass Farm Radio · Father–Son Bluegrass Station.
 </div>
 <div class="footer-links">
 <a href="#about">About</a>
@@ -865,6 +1047,29 @@ service or backend that forwards messages to your inbox.
 <a href="#contact">Requests</a>
 </div>
 </div>
+
+<div class="footer-meta">
+<div class="stat-pill">
+<span>👂 Site visits (this browser):</span>
+<strong id="visit-count">1</strong>
+</div>
+
+<div class="stat-pill">
+<span>Streaming via</span>
+<a class="live365-pill"
+href="https://live365.com/station/Rideout's-Bluegrass-Farm-a13243"
+target="_blank" rel="noopener noreferrer">
+<span>LIVE365</span>
+</a>
+</div>
+
+<div class="small-hint">
+For full listener analytics, use your Live365 dashboard and (optionally) connect Google Analytics.
+</div>
+</div>
+</div>
+
+<div class="footer-art" aria-hidden="true"></div>
 </footer>
 
 <script>
@@ -882,11 +1087,21 @@ function handleRequest(event) {
 event.preventDefault();
 const status = document.getElementById('request-status');
 status.textContent =
-"Thanks for your request! This demo form isn’t wired up yet—ask your web helper to connect it to your email.";
+"Thanks for your request! This demo form isn’t wired up yet—once your station email is ready we’ll connect it.";
 }
 
+// Year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Simple per-browser visit counter (just for fun / local analytics)
+(function () {
+const key = 'rbf_visit_count';
+let count = parseInt(localStorage.getItem(key) || '0', 10);
+count += 1;
+localStorage.setItem(key, String(count));
+const elt = document.getElementById('visit-count');
+if (elt) elt.textContent = count.toLocaleString();
+})();
 </script>
 </body>
 </html>
-
