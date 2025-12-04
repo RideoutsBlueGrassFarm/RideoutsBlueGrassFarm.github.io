@@ -962,7 +962,7 @@ Have a favorite song or artist you’d like to hear? Send a request or a shout-o
 the form below.
 </p>
 
-<form onsubmit="handleRequest(event)">
+<form action="mailto:rideoutbluegrass@gmail.com" method="POST" enctype="text/plain">
 <div class="field">
 <label for="req-name">Your Name</label>
 <input id="req-name" name="name" type="text" placeholder="What should we call you?" required>
@@ -979,12 +979,11 @@ the form below.
 placeholder="Who’s it for, or what do you want to say on air?"></textarea>
 </div>
 
-<button class="btn-nav" type="submit">Send Request (Demo)</button>
-<div id="request-status" class="small-hint"></div>
+<button class="btn-nav" type="submit">Email Your Request</button>
 
 <div class="small-hint" style="margin-top:0.5rem;">
-This form is a front-end demo only. When your station email is ready, we’ll hook this
-up so requests go straight to your inbox or a Google Sheet.
+Clicking “Email Your Request” will open your email app with this info filled in. Just hit send
+to send your request to the station.
 </div>
 </form>
 </div>
@@ -1105,3 +1104,4 @@ if (elt) elt.textContent = count.toLocaleString();
 </script>
 </body>
 </html>
+
